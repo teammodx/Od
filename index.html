@@ -1,117 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DMWIN</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-      background-color: #f4f4f9;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    .history {
-      margin-top: 20px;
-    }
-    .history ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    .history li {
-      margin: 5px 0;
-      padding: 8px;
-      background: #e0e0e0;
-      border-radius: 4px;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #007BFF;
-      color: white;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRX Wingo Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>DMWIN</h1>
-    <p>Club: <strong id="club-name">91 Club</strong></p>
-    <button onclick="switchClub()">Switch Club</button>
-    
-    <div id="timer"></div>
-    <button onclick="startTimer()">Start Timer</button>
-    
-    <h2>Generate Results</h2>
-    <button onclick="generateResult()">Random Big/Small</button>
-    <p id="result">Result: -</p>
-    
-    <div class="history">
-      <h3>Last 10 History Results</h3>
-      <ul id="history"></ul>
-    </div>
-  </div>
 
-  <script>
-    let club = "91 Club";
-    let historyResults = [];
-    let timerInterval;
+    <h1>TRX Wingo Data</h1>
 
-    // Switch Club
-    function switchClub() {
-      club = club === "91 Club" ? "AMD Wingo" : "91 Club";
-      document.getElementById("club-name").innerText = club;
-    }
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>100 TRX</td>
+                <td>Completed</td>
+                <td>2025-01-01</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Jane Smith</td>
+                <td>150 TRX</td>
+                <td>Pending</td>
+                <td>2025-01-02</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Mike Johnson</td>
+                <td>200 TRX</td>
+                <td>Failed</td>
+                <td>2025-01-03</td>
+            </tr>
+        </tbody>
+    </table>
 
-    // Timer
-    function startTimer() {
-      let period = 10; // 10 seconds
-      const timerDiv = document.getElementById("timer");
-      timerDiv.innerText = `Timer: ${period} seconds`;
-      clearInterval(timerInterval);
-      timerInterval = setInterval(() => {
-        period--;
-        timerDiv.innerText = `Timer: ${period} seconds`;
-        if (period <= 0) {
-          clearInterval(timerInterval);
-          timerDiv.innerText = "Timer Finished!";
-        }
-      }, 1000);
-    }
-
-    // Generate Random Result
-    function generateResult() {
-      const result = Math.random() > 0.5 ? "Big" : "Small";
-      document.getElementById("result").innerText = `Result: ${result}`;
-      addToHistory(result);
-    }
-
-    // Add to History
-    function addToHistory(result) {
-      historyResults.unshift(result);
-      if (historyResults.length > 10) {
-        historyResults.pop();
-      }
-      const historyUl = document.getElementById("history");
-      historyUl.innerHTML = "";
-      historyResults.forEach(res => {
-        const li = document.createElement("li");
-        li.innerText = res;
-        historyUl.appendChild(li);
-      });
-    }
-  </script>
 </body>
 </html>
